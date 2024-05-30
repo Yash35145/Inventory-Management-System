@@ -30,7 +30,7 @@ This project is licensed under the GNU General Public License v3.0. See the [LIC
 **Name:** Yash Sanodiya  
 **Email:** [yashsanodiya169@gmail.com](mailto:yashsanodiya169@gmail.com)
 
-
+##
 Thank you for using **TrackSphere**! We hope this system helps you manage your inventory efficiently and effectively. If you have any questions or feedback, feel free to reach out to the developer.
 
 Happy Inventory Managing! 🎉
