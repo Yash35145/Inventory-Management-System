@@ -20,7 +20,7 @@
 
 ## Sample Data
    This repository contains sample datasets for suppliers, products, and orders used in the project. Feel free to use it.
-   If there is no need of sample dataset , then simple delete all the txt files and stat again.
+   If there is no need of sample dataset , then simply delete all the txt files and stat again.
 
 
 ## License 📜
