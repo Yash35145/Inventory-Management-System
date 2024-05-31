@@ -18,6 +18,9 @@
 - **Order Management:**
   - Create and manage purchase orders, track order statuses, and update order information as needed.
 
+## Sample Data
+This repository contains sample datasets for suppliers, products, and orders used in the TrackSphere Inventory Management System project.
+
 ## License 📜
 
 This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
