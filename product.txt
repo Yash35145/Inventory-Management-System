@@ -1,0 +1,20 @@
+p001,Bluetooth,Wireless Bluetooth device,250,149
+p002,Torch,High-lumen LED torch,300,99
+p003,Laptop Charger,Universal laptop charger,150,49
+p004,HDMI Cable,High-speed HDMI cable,400,19
+p005,Wireless Mouse,Ergonomic wireless mouse,200,29
+p006,Keyboard,Mechanical gaming keyboard,100,89
+p007,Smartphone Case,Shockproof smartphone case,350,15
+p008,Screen Protector,Tempered glass screen protector,500,10
+p009,USB Hub,7-port USB hub,120,25
+p010,Webcam,HD 1080p webcam,80,59
+p011,Headphones,Noise-cancelling headphones,130,199
+p012,Portable Speaker,Bluetooth portable speaker,90,75
+p013,Graphics Card,High-performance graphics card,60,399
+p014,RAM,8GB DDR4 RAM,180,45
+p015,Motherboard,Gaming motherboard,70,149
+p016,Processor,Quad-core processor,50,299
+p017,SSD,1TB SSD,110,129
+p018,HDD,2TB hard disk drive,140,79
+p019,Monitor,24-inch LED monitor,95,159
+p020,Printer,Wireless all-in-one printer,85,99

@@ -34,6 +34,9 @@ class Product :
     def get_raw_details(self) :
         return f'{self.id},{self.name},{self.description},{self.quantity},{self.price}'
     
+    def get_stock_details(self) :
+        return f'id: {self.id} , product name: {self.name} , quantity : {self.quantity}'
+    
 # Supplier Class
 class Supplier :
     def __init__(self,sup_id,sup_name,sup_contact,sup_products):
@@ -55,11 +58,40 @@ class Supplier :
         return self.sup_products
 
     def get_details(self) :
-        return f'Supplier id: {self.sup_id} , Supplier name: {self.sup_name} , Supplier contact information: {self.sup_contact} , Supplier Products: {self.sup_products}'
+        return f'Supplier id: {self.sup_id}, Supplier name: {self.sup_name}, Supplier contact information: {self.sup_contact}, Supplier Products: {self.sup_products}'
 
     def get_raw_details(self) :
         return f'{self.sup_id}|{self.sup_name}|{self.sup_contact}|{self.sup_products}'
     
+# purchase order class
+class PurchaseOrder :
+    def __init__(self,order_id,supplier,product_sku,quantity,status):
+        self.order_id = order_id
+        self.supplier = supplier
+        self.product_sku = product_sku
+        self.quantity = quantity
+        self.status = status
+    
+    def get_order_id(self) :
+        return self.order_id
+    
+    def get_supplier(self) :
+        return self.supplier
+    
+    def get_product_sku(self) :
+        return self.product_sku
+    
+    def get_quantity(self) :
+        return self.quantity
+    
+    def get_status(self) :
+        return self.status
+    
+    def get_details(self) :
+        return f'Order ID: {self.order_id}, Supplier: {self.supplier}, Product SKU: {self.product_sku}, Quantity: {self.quantity}, Status: {self.status}'
+    
+    def get_raw_details(self) :
+        return f'{self.order_id},{self.supplier},{self.product_sku},{self.quantity},{self.status}'
 
 # storage class
 class Storage :
@@ -134,17 +166,44 @@ class Storage :
                         f.write(f'{supplier.get_raw_details()}\n')
             finally :
                 f.close()
-        
+    
+    # order management functions
+    def storePurchaseOrder(purchaseOrder) :
+        try :
+            with open('order.txt','a+') as f:
+                f.write(f'{purchaseOrder[0]},{purchaseOrder[1]},{purchaseOrder[2]},{purchaseOrder[3]},{purchaseOrder[4]}\n')
+                print('\nPurchase Order stored successfully\n')
+        except :
+            print('Something went wrong while storing order information')
 
+        finally :
+            f.close()
+
+    def getPurchaseOrder() :
+        if (os.path.exists('order.txt')) :
+            try : 
+                with open('order.txt','r') as f :
+                    data = f.read().split('\n')
+                    orderData = list()
+                    for i in data :
+                        order_list = i.split(',')
+                        if (len(order_list)>4) :
+                            order = PurchaseOrder(order_list[0],order_list[1],order_list[2],order_list[3],order_list[4])
+                            orderData.append(order)
+                    return orderData
+            finally :
+                f.close()     
+    
+    def updatePurchaseorder(orderData) :
+        if (os.path.exists('order.txt')) :
+            try : 
+                with open('order.txt','w') as f :
+                    for order in orderData :
+                        f.write(f'{order.get_raw_details()}\n')
+            finally :
+                f.close()
 
 # product functions to perform specific tasks
-def end_message() :
-    os.system('cls')
-    print('***************************************')
-    print('\tWelcome to TrackSphere')
-    print('***************************************\n')
-    print('\nThank you for using our inventory management system. Have a good day |^_^|\n')
-
 def add_product() :
     id = str(input('Enter product id :'))
     name = str(input('Enter product name :'))
@@ -174,7 +233,6 @@ def update_product(productData) :
                 print('Error occured >>')
     if (product_found == False) :
         print('Product Not found')
-    
     Storage.updateProduct(productData)
     print("Press any key to go back to main menu...")
     msvcrt.getch()
@@ -196,9 +254,13 @@ def delete_product(productData) :
 def view_product(productData) :
     os.system('cls')
     print('\n View Products : \n')
-    for product in productData :
-        print(product.get_details())
-    print('\n')
+    try :
+        for product in productData :
+            print(product.get_details())
+        print('\n')
+    except :
+        print('Error occurred, try again after adding product....\n')
+
     print("Press any key to go back to main menu...")
     msvcrt.getch()
 
@@ -251,12 +313,128 @@ def delete_supplier(supplierData) :
 def view_supplier(supplierData) :
     os.system('cls')
     print('\n View Suppliers : \n')
-    for supplier in supplierData :
-        print(supplier.get_details())
-    print('\n')
+    try :
+        for supplier in supplierData :
+            print(supplier.get_details())
+        print('\n')
+    except :
+        print('Error occurred, try again after adding supplier....\n')
     print("Press any key to go back to main menu...")
     msvcrt.getch()
 
+# stock management functions
+def view_stock_level(productData) :
+    os.system('cls')
+    print('\n View Stock Level : \n')
+    try :
+        for product in productData :
+            print(product.get_stock_details())
+        print('\n')
+    except :
+        print('Error occurred, try again after adding product....\n')
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def update_stock_level(productData) :
+    id = str(input('Enter product id :'))
+    product_found = False
+    for product in productData :
+        if(product.get_id() == id) :
+            product_found = True
+            try :
+                productData.remove(product)
+                name = product.get_name()
+                description = product.get_description()
+                price = product.get_price()
+                new_quantity = str(input('Enter product quantity :'))
+                new_product = Product(id,name,description,new_quantity,price)
+                productData.append(new_product)
+                print('\nStock updated successfully\n')
+            except :
+                print('Error occured >>')
+    if (product_found == False) :
+        print('Product Not found')
+    Storage.updateProduct(productData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+# order management functions
+def create_purchase_order() :
+    order_id = str(input('Enter order id :'))
+    supplier = str(input('Enter supplier name :'))
+    sku = str(input('Enter product SKU :'))
+    quantity = str(input('Enter product quantity :'))
+    status = "pending"
+    Storage.storePurchaseOrder([order_id,supplier,sku,quantity,status])
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def update_purchase_order(orderData) :
+    order_id = str(input('Enter order id :'))
+    order_found = False
+    for order in orderData :
+        if(order.get_order_id() == order_id) :
+            order_found = True
+            try :
+                orderData.remove(order)
+                supplier = str(input('Enter supplier name:'))
+                product_sku = str(input('Enter product sku:'))
+                quantity = str(input('Enter quantity:'))
+                status = 'pending'
+                new_order = PurchaseOrder(order_id,supplier,product_sku,quantity,status)
+                orderData.append(new_order)
+                print('\nOrder updated successfully\n')
+            except :
+                print('Error occured >>')
+    if (order_found == False) :
+        print('Order Not found')
+    Storage.updatePurchaseorder(orderData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def view_purchase_order(orderData) :
+    os.system('cls')
+    print('\n View Purchase Orders : \n')
+    try :
+        for order in orderData :
+            print(order.get_details())
+        print('\n')
+    except :
+        print('Error occurred, try again after adding product....\n')
+
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def update_order_status(orderData) :
+    order_id = str(input('Enter order id :'))
+    order_found = False
+    try :
+        for order in orderData :
+                if(order.get_order_id() == order_id) :
+                    order_found = True
+                    orderData.remove(order)
+                    supplier = order.get_supplier()
+                    product_sku = order.get_product_sku()
+                    quantity = order.get_quantity()
+                    status = str(input('Enter order Status :'))
+                    new_order = PurchaseOrder(order_id,supplier,product_sku,quantity,status)
+                    orderData.append(new_order)
+                    print('\nStatus updated successfully\n')
+        if (order_found == False) :
+             print('Order Not found')
+    except :
+        print('Error occured. Try again after creating purchase order...')
+    Storage.updatePurchaseorder(orderData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+# end message to exit program
+def end_message() :
+    os.system('cls')
+    print('***************************************')
+    print('\tWelcome to TrackSphere')
+    print('***************************************\n')
+    print('\nThank you for using our inventory management system. Have a good day ^_^\n')
 
 # Main Code :- showing the user interface of inventory management
 program_state = True
@@ -280,6 +458,7 @@ while(program_state) :
     # getting all the older data from file
     productData = Storage.getProduct()
     supplierData = Storage.getSupplier()
+    orderData = Storage.getPurchaseOrder() 
 
     # checking the user input
     match option :
@@ -337,9 +516,49 @@ while(program_state) :
                 case 5 :
                     exit
         case 3 :
-            print('Stock Tracking Menu')
+            os.system('cls')
+            print('\nStock Tracking Menu\n')
+            print('1. View Stock Level')
+            print('2. Update Stock Level')
+            print('3. Main Menu\n')
+
+            try :
+                option = int(input('Choose an option :'))
+            except :
+                print('You entered wrong input!! try again')
+                option = int(input('Choose an option :'))
+
+            match option :
+                case 1 :
+                    view_stock_level(productData)
+                case 2 :
+                    update_stock_level(productData)
+                case 3 :
+                    exit
         case 4 :
-            print('Order Management Menu')
+            os.system('cls')
+            print('\nOrder Management Menu\n')
+            print('1. Create Purchase Order')
+            print('2. Update Purchase Order')
+            print('3. View Purchase Order')
+            print('4. Update Order Status')
+            print('5. Main Menu\n')
+            try :
+                option = int(input('Choose an option :'))
+            except :
+                print('You entered wrong input!! try again')
+                option = int(input('Choose an option :'))
+            match option :
+                case 1 :
+                    create_purchase_order()
+                case 2 :
+                    update_purchase_order(orderData)
+                case 3 :                    
+                    view_purchase_order(orderData)
+                case 4 :
+                    update_order_status(orderData)
+                case 5 :
+                    exit
         case 5 :
             end_message()
             program_state = False

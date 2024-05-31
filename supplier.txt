@@ -1,0 +1,21 @@
+s001|ABC Tech Limited|985553,abc@gmail.com|Bluetooth,Torch
+s002|XYZ Industries|981234,xyz@gmail.com|Laptop Charger,HDMI Cable
+s003|Tech World|972345,techworld@gmail.com|Wireless Mouse,Keyboard
+s004|Innovate Supplies|965432,innovate@gmail.com|Smartphone Case,Screen Protector
+s005|Future Electronics|954321,future.elec@gmail.com|USB Hub,Webcam
+s006|Gadget Hub|943210,gadget.hub@gmail.com|Headphones,Portable Speaker
+s007|Elite Components|932109,elite@gmail.com|Graphics Card,RAM
+s008|Supreme Tech|921098,supreme@gmail.com|Motherboard,Processor
+s009|Digital Solutions|910987,digital.solutions@gmail.com|SSD,HDD
+s010|NextGen Supply|909876,nextgen@gmail.com|Monitor,Printer
+s011|Prime Tech|898765,prime.tech@gmail.com|Power Bank,Smartwatch
+s012|E-Components|887654,ecomp@gmail.com|VR Headset,Drone
+s013|Techie Supplies|876543,techie@gmail.com|Router,Modem
+s014|Smart Parts|865432,smart.parts@gmail.com|Thermal Paste,CPU Cooler
+s015|ConnectX|854321,connectx@gmail.com|Ethernet Cable,WiFi Adapter
+s016|Quantum Tech|843210,quantum@gmail.com|RAM,Processor
+s017|Alpha Supplies|832109,alpha@gmail.com|Hard Drive,Memory Card
+s018|Omega Electronics|821098,omega@gmail.com|Laptop Battery,Charger
+s019|Beta Components|810987,beta@gmail.com|Motherboard,Case
+s020|Gamma Tech|809876,gamma@gmail.com|Camera Lens,Tripod
+

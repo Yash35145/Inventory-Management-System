@@ -1,0 +1,20 @@
+o001,ABC Tech Limited,p001,450,Received
+o002,XYZ Industries,p002,300,Pending
+o003,Tech World,p003,150,Shipped
+o004,Innovate Supplies,p004,200,Received
+o005,Future Electronics,p005,250,Canceled
+o006,Gadget Hub,p006,100,Pending
+o007,Elite Components,p007,350,Shipped
+o008,Supreme Tech,p008,500,Received
+o009,Digital Solutions,p009,120,Pending
+o010,NextGen Supply,p010,80,Shipped
+o011,Prime Tech,p011,130,Received
+o012,E-Components,p012,90,Pending
+o013,Techie Supplies,p013,140,Shipped
+o014,Smart Parts,p014,180,Received
+o015,ConnectX,p015,70,Canceled
+o016,Quantum Tech,p016,50,Shipped
+o017,Alpha Supplies,p017,110,Pending
+o018,Omega Electronics,p018,140,Received
+o019,Beta Components,p019,95,Shipped
+o020,Gamma Tech,p020,85,Canceled
