@@ -135,21 +135,141 @@ class Storage :
             finally :
                 f.close()
         
+
+
+# product functions to perform specific tasks
+def end_message() :
+    os.system('cls')
+    print('***************************************')
+    print('\tWelcome to TrackSphere')
+    print('***************************************\n')
+    print('\nThank you for using our inventory management system. Have a good day |^_^|\n')
+
+def add_product() :
+    id = str(input('Enter product id :'))
+    name = str(input('Enter product name :'))
+    description = str(input('Enter product description :'))
+    quantity = str(input('Enter product quantity :'))
+    price = str(input('Enter product price :'))
+    Storage.storeProduct([id,name,description,quantity,price])
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def update_product(productData) :
+    id = str(input('Enter product id :'))
+    product_found = False
+    for product in productData :
+        if(product.get_id() == id) :
+            product_found = True
+            try :
+                productData.remove(product)
+                new_name = str(input('Enter product name :'))
+                new_description = str(input('Enter product description :'))
+                new_quantity = str(input('Enter product quantity :'))
+                new_price = str(input('Enter product price :'))
+                new_product = Product(id,new_name,new_description,new_quantity,new_price)
+                productData.append(new_product)
+                print('\nProduct updated successfully\n')
+            except :
+                print('Error occured >>')
+    if (product_found == False) :
+        print('Product Not found')
+    
+    Storage.updateProduct(productData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def delete_product(productData) :
+    id = str(input('Enter product id :'))
+    product_found = False
+    for product in productData :
+        if(product.get_id() == id) :
+            product_found = True
+            productData.remove(product)
+            print('\nProduct deleted successfully\n')
+    if(product_found == False) :
+        print('\nProduct not found\n')
+    Storage.updateProduct(productData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def view_product(productData) :
+    os.system('cls')
+    print('\n View Products : \n')
+    for product in productData :
+        print(product.get_details())
+    print('\n')
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+# supplier functions to perform specific task
+def add_supplier() :
+    sup_id = str(input('Enter supplier id :'))
+    sup_name = str(input('Enter supplier name :'))
+    sup_contact = str(input('Enter contact information :'))
+    sup_products = str(input('Enter product supplied :'))
+    Storage.storeSupplier([sup_id,sup_name,sup_contact,sup_products])
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def update_supplier(supplierData) :
+    sup_id = str(input('Enter supplier id :'))
+    supplier_found = False
+    for supplier in supplierData :
+        if(supplier.get_sup_id() == sup_id) :
+            supplier_found = True
+            try :
+                supplierData.remove(supplier)
+                new_sup_name = str(input('Enter supplier name :'))
+                new_sup_contact = str(input('Enter supplier contact information :'))
+                new_sup_products = str(input('Enter supplier products :'))
+                new_supplier = Supplier(sup_id,new_sup_name,new_sup_contact,new_sup_products)
+                supplierData.append(new_supplier)
+                print('\nSupplier updated successfully\n')
+            except :
+                print('Error occured >>')
+    if (supplier_found == False) :
+        print('Supplier Not found')
+    Storage.updateSupplier(supplierData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def delete_supplier(supplierData) :
+    sup_id = str(input('Enter supplier id :'))
+    supplier_found = False
+    for supplier in supplierData :
+        if(supplier.get_sup_id() == sup_id) :
+            supplier_found = True
+            supplierData.remove(supplier)
+            print('\nSupplier deleted successfully\n')
+    if(supplier_found == False) :
+        print('\nSupplier not found\n')
+    Storage.updateSupplier(supplierData)
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+def view_supplier(supplierData) :
+    os.system('cls')
+    print('\n View Suppliers : \n')
+    for supplier in supplierData :
+        print(supplier.get_details())
+    print('\n')
+    print("Press any key to go back to main menu...")
+    msvcrt.getch()
+
+
 # Main Code :- showing the user interface of inventory management
 program_state = True
-
 while(program_state) :
     os.system('cls')
     print('***************************************')
     print('\tWelcome to TrackSphere')
     print('***************************************\n')
-
     print('1. Product Management')
     print('2. Supplier Management')
     print('3. Stock Tracking')
     print('4. Order Management')
-    print('5. Reporting')
-    print('6. Exit')
+    print('5. Exit')
     
     try :
         option = int(input('Choose an option :'))
@@ -167,7 +287,6 @@ while(program_state) :
             os.system('cls')
             # showing the user interface of inventory management
             print('\n Product Management Menu\n')
-        
             print('1. Add Product')
             print('2. Update Product')
             print('3. Delete Product')
@@ -181,64 +300,13 @@ while(program_state) :
 
             match option :
                 case 1 :
-                    id = str(input('Enter product id :'))
-                    name = str(input('Enter product name :'))
-                    description = str(input('Enter product description :'))
-                    quantity = str(input('Enter product quantity :'))
-                    price = str(input('Enter product price :'))
-                    Storage.storeProduct([id,name,description,quantity,price])
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-                
+                    add_product()
                 case 2 :
-                    id = str(input('Enter product id :'))
-                    product_found = False
-                    for product in productData :
-                        if(product.get_id() == id) :
-                            product_found = True
-                            try :
-                                productData.remove(product)
-                                new_name = str(input('Enter product name :'))
-                                new_description = str(input('Enter product description :'))
-                                new_quantity = str(input('Enter product quantity :'))
-                                new_price = str(input('Enter product price :'))
-                                new_product = Product(id,new_name,new_description,new_quantity,new_price)
-                                productData.append(new_product)
-                                print('\nProduct updated successfully\n')
-                            except :
-                                print('Error occured >>')
-                    if (product_found == False) :
-                        print('Product Not found')
-                    
-                    Storage.updateProduct(productData)
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-
+                    update_product(productData)
                 case 3 :
-                    id = str(input('Enter product id :'))
-                    product_found = False
-                    for product in productData :
-                        if(product.get_id() == id) :
-                            product_found == True
-                            productData.remove(product)
-                            print('\nProduct deleted successfully\n')
-
-                    if(product_found == False) :
-                        print('\nProduct not found\n')
-
-                    Storage.updateProduct(productData)
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-
+                    delete_product(productData)
                 case 4 :
-                    os.system('cls')
-                    print('\n View Products : \n')
-                    for product in productData :
-                        print(product.get_details())
-                    print('\n')
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-
+                    view_product(productData)
                 case 5 :
                     exit
         case 2 :
@@ -259,59 +327,13 @@ while(program_state) :
 
             match option :
                 case 1 :
-                    sup_id = str(input('Enter supplier id :'))
-                    sup_name = str(input('Enter supplier name :'))
-                    sup_contact = str(input('Enter contact information :'))
-                    sup_products = str(input('Enter product supplied :'))
-                    Storage.storeSupplier([sup_id,sup_name,sup_contact,sup_products])
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
+                    add_supplier()
                 case 2 :
-                    sup_id = str(input('Enter supplier id :'))
-                    supplier_found = False
-                    for supplier in supplierData :
-                        if(supplier.get_sup_id() == sup_id) :
-                            supplier_found = True
-                            try :
-                                supplierData.remove(supplier)
-                                new_sup_name = str(input('Enter supplier name :'))
-                                new_sup_contact = str(input('Enter supplier contact information :'))
-                                new_sup_products = str(input('Enter supplier products :'))
-                                new_supplier = Supplier(sup_id,new_sup_name,new_sup_contact,new_sup_products)
-                                supplierData.append(new_supplier)
-                                print('\nSupplier updated successfully\n')
-                            except :
-                                print('Error occured >>')
-                    if (supplier_found == False) :
-                        print('Supplier Not found')
-                    
-                    Storage.updateSupplier(supplierData)
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
+                    update_supplier(supplierData)
                 case 3 :
-                    sup_id = str(input('Enter supplier id :'))
-                    supplier_found = False
-                    for supplier in supplierData :
-                        if(supplier.get_sup_id() == sup_id) :
-                            supplier_found = True
-                            supplierData.remove(supplier)
-                            print('\nSupplier deleted successfully\n')
-                    if(supplier_found == False) :
-                        print('\nSupplier not found\n')
-
-                    Storage.updateSupplier(supplierData)
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-
+                    delete_supplier(supplierData)
                 case 4 :
-                    os.system('cls')
-                    print('\n View Suppliers : \n')
-                    for supplier in supplierData :
-                        print(supplier.get_details())
-                    print('\n')
-                    print("Press any key to go back to main menu...")
-                    msvcrt.getch()
-
+                    view_supplier(supplierData)
                 case 5 :
                     exit
         case 3 :
@@ -319,13 +341,7 @@ while(program_state) :
         case 4 :
             print('Order Management Menu')
         case 5 :
-            print('Reporting Menu')
-        case 6 :
-            os.system('cls')
-            print('***************************************')
-            print('\tWelcome to TrackSphere')
-            print('***************************************\n')
-            print('\nThank you for using our inventory management system. Have a good day |^_^|\n')
+            end_message()
             program_state = False
             
         
