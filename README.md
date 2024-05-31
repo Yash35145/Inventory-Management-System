@@ -19,7 +19,9 @@
   - Create and manage purchase orders, track order statuses, and update order information as needed.
 
 ## Sample Data
-This repository contains sample datasets for suppliers, products, and orders used in the TrackSphere Inventory Management System project.
+  - This repository contains sample datasets for suppliers, products, and orders used in the project. Feel free to use it.
+  - If there is no need of sample dataset , then simple delete all the txt files and stat again.
+
 
 ## License 📜
 
