@@ -18,9 +18,6 @@
 - **Order Management:**
   - Create and manage purchase orders, track order statuses, and update order information as needed.
 
-- **Reporting:**
-  - Generate detailed reports on product information , supplier information , stock tracking and order management.
-
 ## License 📜
 
 This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.
